@@ -16,6 +16,29 @@ app.controller('AngularPHPController', ($scope, $http, $httpParamSerializerJQLik
     $scope.willUpdateYear = "";
     $scope.willUpdateImdb = "";
 
+    socket = io("http://localhost:3000/");
+
+    socket.on('AddMovie', movie => {
+        $scope.movies.push(movie);
+        $scope.$apply();
+    });
+
+    socket.on('DeleteMovie', id => {
+        const index = $scope.movies.findIndex(movie => movie.film_id === id);
+        if (index !== -1){
+            $scope.movies.splice(index, 1);
+            $scope.$apply();
+        }
+    });
+
+    socket.on('UpdateMovie', movie => {
+        const index = $scope.movies.findIndex(item => item.film_id === movie.film_id);
+        if (index !== -1){
+            $scope.movies[index] = movie;
+            $scope.$apply();
+        }
+    });
+
     $http({
         method: 'GET',
         url: "api/api.php"
@@ -39,6 +62,7 @@ app.controller('AngularPHPController', ($scope, $http, $httpParamSerializerJQLik
         }).then(response => {
             const movie = response.data;
             $scope.movies.push(movie);
+            socket.emit('AddMovie', movie);
         });
     }
 
@@ -60,6 +84,7 @@ app.controller('AngularPHPController', ($scope, $http, $httpParamSerializerJQLik
             }
             $scope.willDeleteId = 0;
             $scope.willDeleteName = "";
+            socket.emit('DeleteMovie', id);
         });
     }
 
@@ -82,6 +107,7 @@ app.controller('AngularPHPController', ($scope, $http, $httpParamSerializerJQLik
             const index = $scope.movies.findIndex(item => item.film_id === movie.film_id);
             if (index !== -1){
                 $scope.movies[index] = movie;
+                socket.emit('UpdateMovie', movie);
             }
         });
     }

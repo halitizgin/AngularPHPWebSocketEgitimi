@@ -51,6 +51,7 @@
         <script src="assets/js/popper.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/angular.min.js"></script>
+        <script src="assets/js/socket.io.js"></script>
         <script src="assets/js/custom.js"></script>
 
         <!-- Veri Ekle Modal -->

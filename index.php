@@ -66,11 +66,11 @@
                     <div class="modal-body">
                         <div class="form-group">
                             Film Adı
-                            <input placeholder="Film Adı"class="form-control" type="text"/>
+                            <input ng-model="addName" placeholder="Film Adı"class="form-control" type="text"/>
                         </div>
                         <div class="form-group">
                             Film Türü
-                            <select placeholder="Film Türü" class="form-control">
+                            <select ng-model="addType" placeholder="Film Türü" class="form-control">
                                 <option value="">Film Türü</option>
                                 <option>Bilim-Kurgu</option>
                                 <option>Dram</option>
@@ -84,15 +84,15 @@
                         </div>
                         <div class="form-group">
                             Film Çıkış Yılı
-                            <input placeholder="Film Çıkış Yılı" class="form-control" type="number"/>
+                            <input ng-model="addYear" min="1900" max="2019" placeholder="Film Çıkış Yılı" class="form-control" type="number"/>
                         </div>
                         <div class="form-group">
                             Film IMDB Puanı
-                            <input placeholder="Film IMDB" class="form-control" type="number"/>
+                            <input ng-model="addImdb" min="0" max="10" placeholder="Film IMDB" class="form-control" type="number"/>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Ekle</button>
+                        <button ng-disabled="addName == '' || addYear < 1900 || addYear == '' || addType == '' || addImdb < 0 || addImdb > 10 || addImdb == ''" ng-click="addMovie()" type="button" class="btn btn-success" data-dismiss="modal">Ekle</button>
                     </div>
                 </div>
             </div>

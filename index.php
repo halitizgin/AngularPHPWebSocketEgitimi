@@ -41,7 +41,7 @@
                     <ul class="list-group" ng-repeat="movie in movies">
                         <li class="list-group-item">{{movie.film_adi}}
                             <button ng-click="prepareDelete(movie.film_id, movie.film_adi)" type="button" data-toggle="modal" data-target="#VeriSilModal"  class="close" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
-                            <button class="close" aria-label="Close" style="margin-top: 5px; margin-right: 10px;" data-toggle="modal" data-target="#VeriGuncelleModal"><i class="far fa-edit fa-xs"></i></button>
+                            <button ng-click="prepareUpdate(movie.film_id, movie.film_adi, movie.film_turu, movie.film_yili, movie.film_imdb)" class="close" aria-label="Close" style="margin-top: 5px; margin-right: 10px;" data-toggle="modal" data-target="#VeriGuncelleModal"><i class="far fa-edit fa-xs"></i></button>
                         </li>
                     </ul>
                 </div>
@@ -84,11 +84,11 @@
                         </div>
                         <div class="form-group">
                             Film Çıkış Yılı
-                            <input ng-model="addYear" min="1900" max="2019" placeholder="Film Çıkış Yılı" class="form-control" type="number"/>
+                            <input ng-model="addYear" placeholder="Film Çıkış Yılı" class="form-control" type="number"/>
                         </div>
                         <div class="form-group">
                             Film IMDB Puanı
-                            <input ng-model="addImdb" min="0" max="10" placeholder="Film IMDB" class="form-control" type="number"/>
+                            <input ng-model="addImdb" placeholder="Film IMDB" class="form-control" type="number"/>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -110,11 +110,11 @@
                     <div class="modal-body">
                        <div class="form-group">
                             Film Adı
-                            <input placeholder="Film Adı" class="form-control" type="text"/>
+                            <input ng-model="willUpdateName" placeholder="Film Adı" class="form-control" type="text"/>
                         </div>
                         <div class="form-group">
                             Film Türü
-                            <select placeholder="Film Türü" class="form-control">
+                            <select ng-model="willUpdateType" placeholder="Film Türü" class="form-control">
                                 <option value="">Film Türü</option>
                                 <option>Bilim-Kurgu</option>
                                 <option>Dram</option>
@@ -128,15 +128,15 @@
                         </div>
                         <div class="form-group">
                             Film Çıkış Yılı
-                            <input placeholder="Film Çıkış Yılı" class="form-control" type="number"/>
+                            <input ng-model="willUpdateYear" placeholder="Film Çıkış Yılı" class="form-control" type="number"/>
                         </div>
                         <div class="form-group">
                             Film IMDB Puanı
-                            <input placeholder="Film IMDB" class="form-control" type="number"/>
+                            <input ng-model="willUpdateImdb" placeholder="Film IMDB" class="form-control" type="number"/>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Güncelle</button>
+                        <button ng-disabled="willUpdateName == '' || willUpdateType == '' || willUpdateYear < 1900 || willUpdateYear > 2019 || willUpdateYear == '' || willUpdateImdb < 0 || willUpdateImdb > 10 || willUpdateImdb == ''" ng-click="updateMovie()" type="button" class="btn btn-success" data-dismiss="modal">Güncelle</button>
                     </div>
                 </div>
             </div>

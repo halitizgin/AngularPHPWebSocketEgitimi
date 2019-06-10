@@ -3,12 +3,12 @@ $db = new PDO("mysql:host=localhost;dbname=angular-php;charset=utf8", "root", ""
 require_once("functions.php");
 error_reporting(1);
 ini_set("display_errors", 1);
-$get_type = $_POST['type'];
-if ($get_type == "select")
+$method = $_SERVER['REQUEST_METHOD'];
+if ($method == "GET")
 {
     get_select();
 }
-else if ($get_type == "insert")
+else if ($method == "POST")
 {
     $get_data['name'] = $_POST['name'];
     $get_data['sort'] = $_POST['sort'];
@@ -16,21 +16,23 @@ else if ($get_type == "insert")
     $get_data['imdb'] = $_POST['imdb'];
     get_insert($get_data);
 }
-else if ($get_type == "delete")
+else if ($method == "DELETE")
 {
-    $get_data = $_POST['id'];
+    parse_str(file_get_contents("php://input"), $DELETE);
+    $get_data = $DELETE['id'];
     get_delete($get_data);
 }
-else if ($get_type == "update")
+else if ($method == "PUT")
 {
-    $get_data['id'] = $_POST['id'];
-    $get_data['name'] = $_POST['name'];
-    $get_data['sort'] = $_POST['sort'];
-    $get_data['year'] = $_POST['year'];
-    $get_data['imdb'] = $_POST['imdb'];
+    parse_str(file_get_contents("php://input"), $PUT);
+    $get_data['id'] = $PUT['id'];
+    $get_data['name'] = $PUT['name'];
+    $get_data['sort'] = $PUT['sort'];
+    $get_data['year'] = $PUT['year'];
+    $get_data['imdb'] = $PUT['imdb'];
     get_update($get_data);
 }
 else
 {
-    echo "Hatalı type parametresi";
+    echo "Hatalı istek metodu!";
 }

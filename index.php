@@ -1,6 +1,6 @@
 <html ng-app="AngularPHP">
     <head>
-        <title>Angular With PHP Arayüz</title>
+        <title>Angular, PHP, Websocket</title>
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/custom.css">
         <link rel="stylesheet" href="assets/css/fontawesome.css">

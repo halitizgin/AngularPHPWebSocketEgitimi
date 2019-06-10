@@ -38,14 +38,10 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <ul class="list-group">
-                        <li class="list-group-item">Film 1
+                    <ul class="list-group" ng-repeat="movie in movies">
+                        <li class="list-group-item">{{movie.film_adi}}
                             <button type="button" data-toggle="modal" data-target="#VeriSilModal"  class="close" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
                             <button class="close" aria-label="Close" style="margin-top: 5px; margin-right: 10px;" data-toggle="modal" data-target="#VeriGuncelleModal"><i class="far fa-edit fa-xs"></i></button>
-                        </li>
-                        <li class="list-group-item">Film 2
-                            <button type="button" data-toggle="modal" data-target="#VeriSilModal"  class="close" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
-                            <button class="close" aria-label="Close" style="margin-top: 5px; margin-right: 10px;" data-toggle="modal" data-target="#VeriGuncelleModal" class="close"><i style class="far fa-edit fa-xs"></i></button>
                         </li>
                     </ul>
                 </div>

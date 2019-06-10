@@ -40,7 +40,7 @@
                 <div class="col-md-12">
                     <ul class="list-group" ng-repeat="movie in movies">
                         <li class="list-group-item">{{movie.film_adi}}
-                            <button type="button" data-toggle="modal" data-target="#VeriSilModal"  class="close" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+                            <button ng-click="prepareDelete(movie.film_id, movie.film_adi)" type="button" data-toggle="modal" data-target="#VeriSilModal"  class="close" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
                             <button class="close" aria-label="Close" style="margin-top: 5px; margin-right: 10px;" data-toggle="modal" data-target="#VeriGuncelleModal"><i class="far fa-edit fa-xs"></i></button>
                         </li>
                     </ul>
@@ -152,11 +152,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        "Film 1" filmini silmek istediğinize emin misiniz?
+                        "{{willDeleteName}}" filmini silmek istediğinize emin misiniz?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Evet</button>
+                        <button ng-click="deleteMovie()" type="button" class="btn btn-success" data-dismiss="modal">Evet</button>
                     </div>
                 </div>
             </div>

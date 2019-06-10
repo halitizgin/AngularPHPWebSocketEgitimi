@@ -7,6 +7,9 @@ app.controller('AngularPHPController', ($scope, $http, $httpParamSerializerJQLik
     $scope.addYear = "";
     $scope.addImdb = "";
 
+    $scope.willDeleteId = 0;
+    $scope.willDeleteName = "";
+
     $http({
         method: 'GET',
         url: "api/api.php"
@@ -31,5 +34,31 @@ app.controller('AngularPHPController', ($scope, $http, $httpParamSerializerJQLik
             const movie = response.data;
             $scope.movies.push(movie);
         });
+    }
+
+    $scope.deleteMovie = () => {
+        $http({
+            method: 'DELETE',
+            url: "api/api.php",
+            data: $httpParamSerializerJQLike({
+                id: $scope.willDeleteId
+            }),
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        }).then(response => {
+            const id = response.data.film_id;
+            const index = $scope.movies.findIndex(movie => movie.film_id === id);
+            if (index !== -1){
+                $scope.movies.splice(index, 1);
+            }
+            $scope.willDeleteId = 0;
+            $scope.willDeleteName = "";
+        });
+    }
+
+    $scope.prepareDelete = (id, name) => {
+        $scope.willDeleteId = id;
+        $scope.willDeleteName = name;
     }
 });
